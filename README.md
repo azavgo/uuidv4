@@ -13,11 +13,11 @@
 1. Add to Cargo.toml: 
 ```Toml
     [dependencies]
-    uuidgen = {git = "https://github.com/azavgo/uuidv4", branch = "main"}
+    uuidv4 = {git = "https://github.com/azavgo/uuidv4", branch = "main"}
 ```
 2. Generate version 4 UUID string:  
 ```Rust
-    use uuidv4::UUIDError;
+    use uuidv4::*;
 
     fn main() -> Result<(), UUIDError>{
         let uuid = uuid()?;
@@ -28,11 +28,11 @@
 ```
 3. Generate QR code from the UUID string and write it as a "uuid".svg file: 
 ```Rust
-    use uuidv4::UUIDError;
+    use uuidv4::*;
 
     fn main() -> Result<(), UUIDError>{
         let uuid = uuid()?;
-        to_svg(&uuid)?;
+        to_svg(uuid)?;
         Ok(())
     } 
 ``` 
