@@ -21,7 +21,7 @@
 
     fn main() -> Result<(), UUIDError>{
         let uuid = uuid_dashed()?;
-        println!("Generated UUID v4: {}", &uuid); 
+        println!("Generated UUID v4: {}", uuid); 
         Ok(())
     }
   
