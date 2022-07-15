@@ -156,14 +156,5 @@ fn to_svg_string(qr: &QrCode, border: i32) -> String {
     result += "</svg>\n";
     result
 }
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
-    }
-}
 //*****************************************************************************
 //End of code
