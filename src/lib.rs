@@ -1,6 +1,7 @@
 use rand::Rng;
 use qrcodegen::{QrCode, QrCodeEcc};
 use std::fs::write;
+use std::env;
 
 //Generates uuid v4, lowercase without dashes
 pub fn uuid() -> Result<String, UUIDError> {
@@ -100,8 +101,51 @@ fn to_two(s: &str) -> Result<String, UUIDError> {
 fn to_capital(s: String) -> String {
     s.to_ascii_uppercase()
 }
-
 //*****************************************************************************
+
+//Helper function matching available options
+fn uuid_input(i: &str) -> u8 {
+    match i {
+        ""         => 0, 
+        "--low"    => 0, 
+        "--upper"  => 1, 
+        "--dashed" => 7, 
+        "--svg"    => 11,
+        "--help"   => 29,
+        "?"        => 29,
+        _          => 0,
+    }
+}
+//*****************************************************************************
+
+//A simple user interface function to start working with this program using a terminal
+pub fn uuid_ui() -> Result<(), UUIDError> {
+    let args = env::args().collect::<Vec<String>>();
+
+    if args.len() == 0 {
+        println!("{}", uuid()?);
+    } else {
+        let parameters: u8 = args.iter().map(|i| uuid_input(i)).collect::<Vec<u8>>().iter().sum();
+        
+        match parameters {
+            0     => println!("{}", uuid()?),
+            1     => println!("{}", uuid_uppercase()?),
+            7     => println!("{}", uuid_dashed()?),
+            8     => println!("{}", uuid_dashed_uppercase()?),
+            11    => to_svg(uuid()?)?,
+            12    => to_svg(uuid_uppercase()?)?,
+            18    => to_svg(uuid_dashed()?)?,
+            19    => to_svg(uuid_dashed_uppercase()?)?,
+            //TODO: Help option ? and --help still need to be implemented 
+            29 .. => println!("Here is help!"),
+            _ => println!("Unsupported option. Please use option ? or --help to display the available options."),
+        }
+    }
+    
+    Ok(())
+}
+//*****************************************************************************
+
 //Custom error
 #[derive(Debug)]
 pub enum UUIDError { 
