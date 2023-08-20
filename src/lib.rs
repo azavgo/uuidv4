@@ -97,7 +97,7 @@ fn to_two(s: &str) -> Result<String, UUIDError> {
 }
 //*****************************************************************************
 
-//Converts lowercase string to CAPITAL case string
+//Helper function to convert lowercase string to CAPITAL case string
 fn to_capital(s: String) -> String {
     s.to_ascii_uppercase()
 }
