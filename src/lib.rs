@@ -102,6 +102,7 @@ fn to_capital(s: String) -> String {
     s.to_ascii_uppercase()
 }
 //*****************************************************************************
+//This section allows a simple terminal executable implementation of this library 
 
 //Helper function matching available options
 fn uuid_input(i: &str) -> u8 {
@@ -116,7 +117,11 @@ fn uuid_input(i: &str) -> u8 {
         _          => 0,
     }
 }
-//*****************************************************************************
+
+//Helper function implementing ? and --help options
+fn uuid_help() -> String {
+    String::from("Usage: uuidv4bin [? | --help] [--low | --upper] [--dashed] [--svg]")
+}
 
 //A simple user interface function to start working with this program using a terminal
 pub fn uuid_ui() -> Result<(), UUIDError> {
@@ -136,8 +141,7 @@ pub fn uuid_ui() -> Result<(), UUIDError> {
             12    => to_svg(uuid_uppercase()?)?,
             18    => to_svg(uuid_dashed()?)?,
             19    => to_svg(uuid_dashed_uppercase()?)?,
-            //TODO: Help option ? and --help still need to be implemented 
-            29 .. => println!("Here is help!"),
+            29 .. => println!("{}", uuid_help()),
             _ => println!("Unsupported option. Please use option ? or --help to display the available options."),
         }
     }
@@ -145,7 +149,6 @@ pub fn uuid_ui() -> Result<(), UUIDError> {
     Ok(())
 }
 //*****************************************************************************
-
 //Custom error
 #[derive(Debug)]
 pub enum UUIDError { 
@@ -164,7 +167,6 @@ impl From<std::io::Error> for UUIDError {
         UUIDError::IOError(error)
     }
 }
-//*****************************************************************************
 
 //*****************************************************************************
 // From: https://github.com/nayuki/QR-Code-generator/blob/master/rust/examples/qrcodegen-demo.rs

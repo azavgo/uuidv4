@@ -37,7 +37,7 @@
         Ok(())
     } 
 ``` 
-4. User interface functionality to run the program from the terminal: 
+4. User interface functionality to use the uuidv4 library in the terminal. This example program is compiled as uuidv4bin: 
 ```Rust
     use uuidv4::*;
 
