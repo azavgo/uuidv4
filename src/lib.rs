@@ -2,13 +2,6 @@ use rand::Rng;
 use qrcodegen::{QrCode, QrCodeEcc};
 use std::fs::write;
 use std::env;
-use cli_clipboard;
-
-
-//Copy a String type to clipboard
-pub fn clipboard(s: String) {
-    cli_clipboard::set_contents(s).unwrap();
-}
 
 //Generates uuid v4, lowercase without dashes
 pub fn uuid() -> Result<String, UUIDError> {
